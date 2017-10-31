@@ -1,0 +1,12 @@
+[Unit]
+Description=github-webhook-client
+After=syslog.target
+
+[Service]
+User=nobody
+ExecStart=/srv/github-webhook-client/github-webhook-client.jar
+EnvironmentFile=/etc/default/github-webhook-client
+
+
+[Install]
+WantedBy=multi-user.target
