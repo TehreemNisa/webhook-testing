@@ -59,7 +59,8 @@ public class GithubWebhookClientApplication {
 	
 	@RequestMapping(path="/util/github-webhook-client", method=RequestMethod.POST)
 	public ResponseEntity<String> handle(@RequestHeader("X-Hub-Signature") String signature,
-			@RequestBody String payload, @RequestHeader("User-Agent") String userAgent) {
+			@RequestBody String payload, @RequestHeader("User-Agent") String userAgent,
+                        @RequestHeader("X-GitHub-Event") String event) {
 
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("X-Github-Webhook-Client-Version", appVersion);
@@ -81,6 +82,10 @@ public class GithubWebhookClientApplication {
                        
 		}
 			System.out.println("Signature Is Verified");
+                        System.out.println("This is the event : "+event);
+//                 if (PING_EVENT.equals(event)) {
+//                          return ResponseEntity.ok("{ \"message\": \"Successfully processed ping event\" }\n");
+//                }
 		Map<?,?> repo=null;
                 System.out.println(payload);
 		try {
