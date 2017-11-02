@@ -84,11 +84,16 @@ public class GithubWebhookClientApplication {
 		Map<?,?> repo=null;
 
 		try {
+                    System.out.println("Line1");
 			Map<?, ?> payloadMap = new ObjectMapper().readValue(payload, Map.class);
+                        System.out.println("Line2");
 			repo = (Map<?, ?>) payloadMap.get("repository");
+                        System.out.println("Line3");
 			String repoName = (String)repo.get("full_name");
+                        System.out.println("Line4");
 			
 			String repoKey = "REPO_" + repoName.replace("/", "_").toUpperCase() + "_SHELL";
+                        System.out.println("Line5");
 			//If we environment is set
 			if (Objects.nonNull(env)){
 				String shellPath = env.getProperty(repoKey);
